@@ -17,40 +17,74 @@
 
 (() => {
 
-  function createButton(text, onclick) {
-    const button = document.createElement('BUTTON');
-    button.className = 'button';
-    button.style.verticalAlign = 'middle';
-    button.style.marginRight = '8px';
-    button.innerHTML = text;
-    button.href = 'javascript:void(0)';
-    button.addEventListener('click', onclick);
-    return button;
-  }
-
-  const observer = new MutationObserver(() => {
-    const forwardLayer = document.querySelector('#fastpostform');
-    if (!forwardLayer) return;
-
-    const textarea = forwardLayer.querySelector('#fastpostmessage');
-    const buttonBar = forwardLayer.querySelector('#fastpostsubmit').parentNode;
-    const submit = forwardLayer.querySelector('#fastpostsubmit');
-
-    if (!textarea || !buttonBar || !submit) return;
-
-    const buttons = [];
-    function disableAllButtons() {
-      buttons.forEach((btn) => (btn.disabled = true));
+    function createButton(text, onclick) {
+        const button = document.createElement('BUTTON');
+        button.className = 'button';
+        button.style.verticalAlign = 'middle';
+        button.style.marginRight = '8px';
+        button.innerHTML = text;
+        button.href = 'javascript:void(0)';
+        button.addEventListener('click', onclick);
+        return button;
     }
 
-    buttons.push(createButton('𝓌𝒶𝓇𝒹', () => {
-      textarea.value = '插眼\n[img=50,50]https://img02.hi-pda.com/forum/attachments/day_210917/21091722335df6f9c023564795.png[/img]';
-      disableAllButtons();
-      submit.click();
-    }));
+    // 获取tid
+    function getUrlParams(name) {
+        var url = window.location.search;
+        if (url.indexOf('?') == 1) { return false; }
+        url = url.substr(1);
+        url = url.split('&');
+        var name = name || '';
+        var nameres;
 
-    buttons.forEach((btn) => buttonBar.insertBefore(btn, submit));
-  });
-  observer.observe(document.getElementById('fastpostmessage'), {subtree: true, attributes: true});
+        for(var i=0;i<url.length;i++) {
+            var info = url[i].split('=');
+            var obj = {};
+            obj[info[0]] = decodeURI(info[1]);
+            url[i] = obj;
+        }
+        if (name) {
+            for(var i=0;i<url.length;i++) {
+                for (const key in url[i]) {
+                    if (key == name) {
+                        nameres = url[i][key];
+                    }
+                }
+            }
+        } else {
+            nameres = url;
+        }
+        return nameres;
+    }
+    // 收藏
+    function addfavorites(tid) {
+        ajaxget('my.php?item=favorites&tid=' + tid, 'favorite_msg'); return false;
+    }
+    const observer = new MutationObserver(() => {
+        const forwardLayer = document.querySelector('#fastpostform');
+        if (!forwardLayer) return;
+
+        const textarea = forwardLayer.querySelector('#fastpostmessage');
+        const buttonBar = forwardLayer.querySelector('#fastpostsubmit').parentNode;
+        const submit = forwardLayer.querySelector('#fastpostsubmit');
+
+        if (!textarea || !buttonBar || !submit) return;
+
+        const buttons = [];
+        function disableAllButtons() {
+            buttons.forEach((btn) => (btn.disabled = true));
+        }
+
+        buttons.push(createButton('𝓌𝒶𝓇𝒹', () => {
+            var tid = getUrlParams("tid");
+            addfavorites(tid);
+            textarea.value = '插眼\n[img=50,50]https://img02.hi-pda.com/forum/attachments/day_210917/21091722335df6f9c023564795.png[/img]';
+            disableAllButtons();
+            submit.click();
+        }));
+
+        buttons.forEach((btn) => buttonBar.insertBefore(btn, submit));
+    });
+    observer.observe(document.getElementById('fastpostmessage'), { subtree: true, attributes: true });
 
 })();
