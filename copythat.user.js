@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         𝓗𝓲 𝓬𝓸𝓹𝔂 𝓽𝓱𝓪𝓽
+// @name         D板Clippy
 // @namespace    https://github.com/vonsy
 // @version      0.0.1
-// @description  D板曲别针,一些小功能.
+// @description  D板大眼夹,一些小功能.
 // @author       fsy <fsy@outlook.com>
 // @license      MIT License
 // @match        https://www.hi-pda.com/forum/viewthread.php*
