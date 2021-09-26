@@ -4,7 +4,7 @@
 // @version      0.0.1
 // @description  D板曲别针,一些小功能.
 // @author       fsy <fsy@outlook.com>
-// @license      Null
+// @license      MIT License
 // @match        https://www.hi-pda.com/forum/viewthread.php*
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/vonsy/copythat/main/copythat.meta.js
