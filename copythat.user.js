@@ -67,6 +67,7 @@
         const textarea = forwardLayer.querySelector('#fastpostmessage');
         const buttonBar = forwardLayer.querySelector('#fastpostsubmit').parentNode;
         const submit = forwardLayer.querySelector('#fastpostsubmit');
+        const fastpostrefresh = forwardLayer.querySelector('#fastpostrefresh');
 
         if (!textarea || !buttonBar || !submit) return;
 
@@ -83,7 +84,7 @@
             submit.click();
         }));
 
-        buttons.forEach((btn) => buttonBar.insertBefore(btn, submit));
+        buttons.forEach((btn) => buttonBar.insertBefore(btn, fastpostrefresh));
     });
     observer.observe(document.getElementById('fastpostmessage'), { subtree: true, attributes: true });
 
