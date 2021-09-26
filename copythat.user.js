@@ -78,7 +78,7 @@
         buttons.push(createButton('𝓌𝒶𝓇𝒹', () => {
             var tid = getUrlParams("tid");
             addfavorites(tid);
-            textarea.value = '插眼\n[img=50,50]https://img02.hi-pda.com/forum/attachments/day_210917/21091722335df6f9c023564795.png[/img]';
+            textarea.value = '插眼\n[img]https://www.hi-pda.com/forum/images/smilies/default/cool.gif[/img]';
             disableAllButtons();
             submit.click();
         }));
