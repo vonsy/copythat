@@ -201,9 +201,14 @@
             let msgElement = this.parentNode.parentNode.parentNode.nextSibling.nextSibling.querySelector('.t_msgfont');
             let msgContent = msgElement.textContent;
             if (msgContent.indexOf(sign)!==-1){
+                console.log(msgContent);
                 let msgWithoutSign = msgContent.split(sign)[0].trim();
                 msgElement.textContent = valuesDecode(msgWithoutSign);
                 this.textContent = '已和谐';
+            } else {
+                console.log(msgContent);
+                msgElement.innerHTML = valuesEncode(msgContent) + `   <a href="https://github.com/vonsy/copythat" target="_blank"><font size="1">${sign}</font></a>`;
+                this.textContent = '和谐';
             }
         }
         return btnDecode;
