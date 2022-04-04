@@ -182,22 +182,25 @@
     let authorinfo = document.querySelectorAll('.authorinfo');
     let msgList = document.querySelectorAll('.t_msgfont');
 
-    let btnDecode = document.createElement('button');
-    btnDecode.textContent = '和谐';
-    btnDecode.onclick = function(){
-        let msgElement = this.parentNode.parentNode.parentNode.nextSibling.nextSibling.querySelector('.t_msgfont');
-        let msgContent = msgElement.textContent;
-        if (msgContent.indexOf(sign)!==-1){
-            let msgWithoutSign = msgContent.replace(sign,'').trim();
-            msgElement.textContent = valuesDecode(msgWithoutSign);
-            this.textContent = '已和谐';
+    const btnDecode = function(){
+        let btnDecode = document.createElement('button');
+        btnDecode.textContent = '和谐';
+        btnDecode.onclick = function(){
+            let msgElement = this.parentNode.parentNode.parentNode.nextSibling.nextSibling.querySelector('.t_msgfont');
+            let msgContent = msgElement.textContent;
+            if (msgContent.indexOf(sign)!==-1){
+                let msgWithoutSign = msgContent.replace(sign,'').trim();
+                msgElement.textContent = valuesDecode(msgWithoutSign);
+                this.textContent = '已和谐';
+            }
         }
+        return btnDecode;
     }
 
     for (let i=0;i<msgList.length;i++){
         let msg = msgList[i].textContent;
         if (msg.indexOf(sign) !== -1) {
-            authorinfo[i].appendChild(btnDecode);
+            authorinfo[i].appendChild(btnDecode());
             if (autoDecode){
                 msgList[i].textContent = msg;
                 msgList[i].style.backgroundColor = 'lightgreen';
