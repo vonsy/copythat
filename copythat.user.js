@@ -17,7 +17,19 @@
 
 (function() {
     const sign = '来自地板带着爱';
-    const autoDecode = false;
+    let autoDecode = false;
+    let umenu = document.querySelector('#umenu');
+    let hiSet = document.createElement('a');
+    hiSet.textContent = 'Clippy';
+    hiSet.href = 'javascript:void(0)';
+    hiSet.onclick = function(){
+        let hipdaAutoDecode = prompt('是否自动反和谐? y/n');
+        if (hipdaAutoDecode === 'y' || hipdaAutoDecode === 'n'){
+            localStorage.setItem('hipdaAutoDecode', hipdaAutoDecode);
+        }
+    }
+    umenu.appendChild(hiSet);
+    autoDecode = (localStorage.getItem('hipdaAutoDecode')==='y')?true:false;
     let fastpostmessage = document.querySelector('#fastpostmessage');
     let fastpostsubmit = document.querySelector('#fastpostsubmit');
     let fastpostrefresh = document.querySelector('#fastpostrefresh');
@@ -202,7 +214,7 @@
         if (msg.indexOf(sign) !== -1) {
             authorinfo[i].appendChild(btnDecode());
             if (autoDecode){
-                msgList[i].textContent = msg;
+                msgList[i].textContent = msg.replace(sign,'').trim();
                 msgList[i].style.backgroundColor = 'lightgreen';
                 let tr = document.createElement('tr');
                 let td = document.createElement('td');
