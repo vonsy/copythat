@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         D板Clippy
+// @name         D Clippy
 // @namespace    https://github.com/vonsy
 // @version      0.0.1
 // @description  D板大眼夹,一些小功能.
