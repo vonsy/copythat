@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         D Clippy
 // @namespace    https://github.com/vonsy
-// @version      0.0.1
+// @version      0.0.2
 // @description  D板大眼夹,一些小功能.
 // @author       fsy <fsy@outlook.com>
 // @license      MIT License
