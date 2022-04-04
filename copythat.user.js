@@ -15,77 +15,21 @@
 
 'use strict';
 
-(() => {
+(function() {
+    const sign = '上海加油';
+    let fastpostmessage = document.querySelector('#fastpostmessage');
+    let fastpostsubmit = document.querySelector('#fastpostsubmit');
+    let fastpostrefresh = document.querySelector('#fastpostrefresh');
+    let parent = fastpostrefresh.parentNode
 
-    function createButton(text, onclick) {
-        const button = document.createElement('BUTTON');
-        button.className = 'button';
-        button.style.verticalAlign = 'middle';
-        button.style.marginRight = '8px';
-        button.innerHTML = text;
-        button.href = 'javascript:void(0)';
-        button.addEventListener('click', onclick);
-        return button;
-    }
-
-    // 获取tid
-    function getUrlParams(name) {
-        var url = window.location.search;
-        if (url.indexOf('?') == 1) { return false; }
-        url = url.substr(1);
-        url = url.split('&');
-        var name = name || '';
-        var nameres;
-
-        for(var i=0;i<url.length;i++) {
-            var info = url[i].split('=');
-            var obj = {};
-            obj[info[0]] = decodeURI(info[1]);
-            url[i] = obj;
+    let btn = document.createElement('button');
+    btn.id = 'btnWithSign';
+    btn.type = 'submit';
+    btn.textContent = '戳我戳我';
+    btn.onclick = function(){
+        if (fastpostmessage.value) {
+            fastpostmessage.value += `   [size=1]${sign}[/size]`;
         }
-        if (name) {
-            for(var i=0;i<url.length;i++) {
-                for (const key in url[i]) {
-                    if (key == name) {
-                        nameres = url[i][key];
-                    }
-                }
-            }
-        } else {
-            nameres = url;
-        }
-        return nameres;
     }
-    // 收藏
-    function addfavorites(tid) {
-        ajaxget('my.php?item=favorites&tid=' + tid, 'favorite_msg'); return false;
-    }
-    const observer = new MutationObserver(() => {
-        const forwardLayer = document.querySelector('#fastpostform');
-        if (!forwardLayer) return;
-
-        const textarea = forwardLayer.querySelector('#fastpostmessage');
-        const buttonBar = forwardLayer.querySelector('#fastpostsubmit').parentNode;
-        const submit = forwardLayer.querySelector('#fastpostsubmit');
-        const fastpostrefresh = forwardLayer.querySelector('#fastpostrefresh');
-
-        if (!textarea || !buttonBar || !submit) return;
-
-        const buttons = [];
-        function disableAllButtons() {
-            buttons.forEach((btn) => (btn.disabled = true));
-        }
-
-        buttons.push(createButton('𝓌𝒶𝓇𝒹', () => {
-            var tid = getUrlParams("tid");
-            addfavorites(tid);
-            textarea.value = '插眼\n[img]https://www.hi-pda.com/forum/images/smilies/default/cool.gif[/img]';
-            disableAllButtons();
-            submit.click();
-        }));
-
-        buttons.forEach((btn) => buttonBar.insertBefore(btn, fastpostrefresh));
-    });
-    observer.observe(document.getElementById('fastpostmessage'), { subtree: true, attributes: true });
-
+    parent.insertBefore(btn,fastpostrefresh);
 })();
