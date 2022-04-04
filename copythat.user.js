@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         D板Clippy
+// @name         D Clippy
 // @namespace    https://github.com/vonsy
-// @version      0.0.1
+// @version      0.0.2
 // @description  D板大眼夹,一些小功能.
 // @author       fsy <fsy@outlook.com>
 // @license      MIT License
@@ -201,7 +201,7 @@
             let msgElement = this.parentNode.parentNode.parentNode.nextSibling.nextSibling.querySelector('.t_msgfont');
             let msgContent = msgElement.textContent;
             if (msgContent.indexOf(sign)!==-1){
-                let msgWithoutSign = msgContent.replace(sign,'').trim();
+                let msgWithoutSign = msgContent.split(sign)[0].trim();
                 msgElement.textContent = valuesDecode(msgWithoutSign);
                 this.textContent = '已和谐';
             }
@@ -218,7 +218,7 @@
                 msgList[i].style.backgroundColor = 'lightgreen';
                 let tr = document.createElement('tr');
                 let td = document.createElement('td');
-                td.textContent = valuesDecode(msg.replace(sign,'').trim());
+                td.textContent = valuesDecode(msg.split(sign)[0].trim());
                 tr.appendChild(td);
                 msgList[i].parentNode.parentNode.insertBefore(tr,msgList[i].parentNode);
             }
